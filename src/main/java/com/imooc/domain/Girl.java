@@ -22,7 +22,7 @@ public class Girl {
     @NotBlank(message = "这个字段必传")
     private String cupSize;
 
-    @Min(value = 18, message = "未成年少女禁止入门")
+    @Min(value = 18, message = "未成年少女禁止入内")
 //    @NotNull
 //    @Max()
 //    @Length()

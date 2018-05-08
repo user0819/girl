@@ -1,8 +1,11 @@
 package com.imooc.controller;
 
+import com.imooc.aspect.HttpAspect;
 import com.imooc.domain.Girl;
 import com.imooc.repository.GirlRepository;
 import com.imooc.service.GirlService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +19,7 @@ import java.util.List;
  */
 @RestController
 public class GirlController {
-
+    public final static Logger logger = LoggerFactory.getLogger(HttpAspect.class);
     @Autowired
     private GirlRepository girlRepository;
 
@@ -52,7 +55,14 @@ public class GirlController {
     //查询一个女生
     @GetMapping(value = "/girls/{id}")
     public Girl girlFindOne(@PathVariable("id") Integer id) {
+        logger.info(id.toString());
         return girlRepository.findOne(id);
+    }
+
+    //查询一个女生的年龄
+    @GetMapping(value="/girls/getAge/{id}")
+    public void getAge(@PathVariable("id") Integer id) throws Exception{
+        girlService.getAgeById(id);
     }
 
     //更新
@@ -84,4 +94,6 @@ public class GirlController {
     public void girlTwo() {
         girlService.insertTwo();
     }
+
+
 }
